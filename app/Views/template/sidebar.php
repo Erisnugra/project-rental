@@ -40,13 +40,6 @@
             <span>Data Mobil</span></a>
     </li>
 
-    <!-- Nav Item - Tables -->
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('merek'); ?>">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Data Merk</span></a>
-    </li>
-
     <!-- Heading -->
     <div class="sidebar-heading">
         Master Pemesan
@@ -77,11 +70,6 @@
             <span>Data Pesanan</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="<?= base_url('perjalanan'); ?>">
-            <i class="fas fa-fw fa-solid fa-list"></i>
-            <span>Data Perjalanan</span></a>
-    </li>
 
 
 

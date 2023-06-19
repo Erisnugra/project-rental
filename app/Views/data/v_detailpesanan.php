@@ -24,7 +24,7 @@
         <div class="col-md-6">
             <div class="card shadow">
                 <div class="card-header">
-                    <h6 class="m-0 font-weight-bold text-primary">Detail Pesanan - Fakhrul</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Detail Pesanan</h6>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -33,7 +33,7 @@
                             Tanggal Pinjam <br>
                             Tanggal Kembali <br>
                             Mobil <br>
-                            Perjalanan <br>
+                            Status Pembayaran <br>
                             Total Harga <br>
                             Jenis Bayar <br>
                         </div>
@@ -44,16 +44,15 @@
                             : <br>
                             : <br>
                             : <br>
-                            : <br>
                         </div>
                         <div class="col-sm-6">
-                            <strong>Fakhrul</strong><br>
-                            <strong>2022-11-26</strong><br>
-                            <strong>2022-11-27</strong><br>
-                            <strong>Suzuki All New Ertiga</strong><br>
-                            <strong>Cilacap - Jogjakarta</strong><br>
-                            <strong>Rp. 300.000,00</strong><br>
-                            <strong>Cash</strong><br>
+                            <strong><?= $data->nama ?></strong><br>
+                            <strong><?= date('l, d m Y', strtotime($data->tanggal_pinjam)) ?></strong><br>
+                            <strong><?= date('l, d m Y', strtotime($data->tanggal_kembali)) ?></strong><br>
+                            <strong><?= $data->nama_mobil ?></strong><br>
+                            <strong><?= $data->status ?></strong><br>
+                            <strong><?= $data->total_harga ?></strong><br>
+                            <strong><?= $data->jenis_bayar ?></strong><br>
                         </div>
                     </div>
                     <hr>

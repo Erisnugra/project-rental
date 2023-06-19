@@ -3,9 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\datamobil;
+use App\Models\datapesanan;
 
 class data extends BaseController
 {
+
+    private $ModelPesanan;
+
+    public function __construct()
+    {
+        $this->ModelPesanan = new datapesanan();
+    }
+
     public function index()
     {
         return view('data/merek');
@@ -44,9 +53,16 @@ class data extends BaseController
         return view('data/v_ubahpesanan');
     }
 
-    public function detailpesanan()
+    public function detailpesanan($id)
     {
-        return view('data/v_detailpesanan');
+        $data = [
+            'title' => 'Detail Pesanan',
+            'data'  => $this->ModelPesanan
+                ->join('data_customer', 'data_customer.id_customer = data_pesanan.id_customer')
+                ->join('data_mobil', 'data_mobil.id_mobil = data_pesanan.id_mobil')
+                ->find($id)
+        ];
+        return view('data/v_detailpesanan', $data);
     }
 
     public function ubahperjalanan()

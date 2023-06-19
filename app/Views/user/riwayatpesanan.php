@@ -5,6 +5,14 @@
         <h3>Riwayat Sewa</h3>
     </center>
     <div class="container">
+        <?php if (session()->getFlashdata('pesan')) : ?>
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('pesan'); ?>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        <?php endif; ?>
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -32,7 +40,7 @@
                     <td><?= $row->status ?></td>
                     <td class="text-center">
                         <a href="<?= base_url('user/detail_booking/' . $row->id_pesanan) ?>" class="badge bagde-success">Detail</a>
-                        <?php if ($row->status != 'Pembayaran Dibatalkan') { ?>
+                        <?php if ($row->status == 'Melakukan Pembayaran') { ?>
                             <a href="<?= base_url('user/batal_pesanan/' . $row->id_pesanan) ?>" class="badge " style="background-color: red;" onclick="return confirm('Yakin ingin membatalkan?')">Batalkan</a>
                         <?php } ?>
                     </td>

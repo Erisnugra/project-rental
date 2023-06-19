@@ -39,7 +39,10 @@ class t_datapesanan extends BaseController
     {
         $data = [
             'title' => 'Form Edit Data mobil',
-            'mobil' => $this->model->ubah_data($id_pesanan)
+            'data' => $this->model
+                ->join('data_customer', 'data_customer.id_customer = data_pesanan.id_customer')
+                ->join('data_mobil', 'data_mobil.id_mobil = data_pesanan.id_mobil')
+                ->find($id_pesanan)
         ];
 
         return view('data/v_ubahpesanan', $data);
@@ -47,15 +50,13 @@ class t_datapesanan extends BaseController
     public function ubahdata($id)
     {
         $data = [
-            'nama_pemesan' => $this->request->getPost('nama_pemesan'),
+            'nama' => $this->request->getPost('nama_pemesan'),
             'mobil' => $this->request->getPost('mobil'),
-            'perjalanan' => $this->request->getPost('perjalanan'),
             'tanggal_pinjam' => $this->request->getPost('tanggal_pinjam'),
             'tanggal_kembali' => $this->request->getPost('tanggal_kembali'),
+            'status' => $this->request->getPost('status'),
             'total_harga' => $this->request->getPost('total_harga'),
             'jenis_bayar' => $this->request->getPost('jenis_bayar'),
-
-
         ];
 
         $success = $this->model->ubah($id, $data);

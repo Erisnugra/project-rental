@@ -10,7 +10,7 @@ class datapesanan extends Model
     protected $primaryKey = "id_pesanan";
     protected $returnType = "object";
     protected $useTimestamps = false;
-    protected $allowedFields = ["id_pesanan", "id_user", "id_customer", "id_perjalanan", "id_mobil", "tanggal_pinjam", "tanggal_kembali", "total_harga", "status", "jenis_bayar"];
+    protected $allowedFields = ["id_pesanan", "id_user", "id_customer", "id_mobil", "tanggal_pinjam", "tanggal_kembali", "total_harga", "status", "jenis_bayar"];
 
     public function tambah($data)
     {

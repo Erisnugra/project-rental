@@ -108,16 +108,9 @@ class user extends BaseController
         ];
         $this->ModelCustomer->insert($customer);
         $data_terakhirC = $this->ModelCustomer->orderBy('id_customer', 'DESC')->first();
-        $perjalanan = [
-            'kota_asal' => $this->request->getPost('kota_asal'),
-            'kota_tujuan'   => $this->request->getPost('kota_tujuan')
-        ];
-        $this->ModelPerjalanan->insert($perjalanan);
-        $data_terakhirP = $this->ModelPerjalanan->orderBy('id_perjalanan', 'DESC')->first();
         $pesanan = [
             'id_user'   => session()->get('id_user'),
             'id_customer'   => $data_terakhirC->id_customer,
-            'id_perjalanan' => $data_terakhirP->id_perjalanan,
             'id_mobil'      => $id,
             'tanggal_pinjam' => $this->request->getPost('tanggal_pinjam'),
             'tanggal_kembali' => $this->request->getPost('tanggal_kembali'),
@@ -131,7 +124,7 @@ class user extends BaseController
         // die();
         $this->ModelPesanan->insert($pesanan);
         session()->setFlashdata('pesan', 'Berhasil Membuat Pesanan!.');
-        return redirect()->to(base_url('user'));
+        return redirect()->to(base_url('user/riwayat'));
     }
 
     public function riwayat()

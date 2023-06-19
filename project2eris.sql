@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 09:26 PM
+-- Generation Time: Jun 19, 2023 at 06:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -41,7 +41,10 @@ CREATE TABLE `data_customer` (
 
 INSERT INTO `data_customer` (`id_customer`, `nama`, `jenis_kelamin`, `alamat`, `id_user`) VALUES
 (1, 'asdf', 'Laki-laki', 'jl subang kabup', 11),
-(2, 'aku', 'Laki-laki', 'kp kdung gede', 11);
+(2, 'aku', 'Laki-laki', 'kp kdung gede', 11),
+(3, 'Eris', 'Laki-laki', 'Garuts', 11),
+(4, 'Udin', 'Laki-laki', 'Subang', 11),
+(5, 'Sumanto', 'Perempuan', 'Jakarta', 11);
 
 -- --------------------------------------------------------
 
@@ -84,7 +87,7 @@ CREATE TABLE `data_mobil` (
 --
 
 INSERT INTO `data_mobil` (`id_mobil`, `nama_merk`, `nama_mobil`, `warna_mobil`, `jumlah_kursi`, `no_polisi`, `tahun_beli`, `harga`, `gambar`) VALUES
-(20, 'Toyota', 'dfd', 'df', '123', 'dfd', '23', 300000, '1686837066_2cb70a3de07bf664afa9.jpg'),
+(20, 'Toyota', 'Avanza', 'Merah', '4', 'dfd', '23', 300000, '1686837066_2cb70a3de07bf664afa9.jpg'),
 (21, 'Mitsubishi', 'Mobil Bekas', 'Hitam', '4', '123456', '2015', 100000, '1686838136_d25294ac81bdf52ab19a.jpeg'),
 (22, 'Toyota', 'MObil Baru', 'Hitam', '1', '123', '2020', 200000000, '1686838479_ff6dba7c955374e523c4.jpeg');
 
@@ -124,7 +127,8 @@ CREATE TABLE `data_perjalanan` (
 
 INSERT INTO `data_perjalanan` (`id_perjalanan`, `kota_asal`, `kota_tujuan`) VALUES
 (1, 'dfd', 'bekasi'),
-(2, 'subang', 'bekasi');
+(2, 'subang', 'bekasi'),
+(3, 'Garus', 'Subang');
 
 -- --------------------------------------------------------
 
@@ -136,12 +140,11 @@ CREATE TABLE `data_pesanan` (
   `id_pesanan` int(10) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `id_customer` int(11) DEFAULT NULL,
-  `id_perjalanan` int(11) DEFAULT NULL,
   `id_mobil` int(11) DEFAULT NULL,
   `tanggal_pinjam` date NOT NULL,
   `tanggal_kembali` date NOT NULL,
   `total_harga` int(20) NOT NULL,
-  `status` enum('Melakukan Pembayaran','Pembayaran Selesai','Pembayaran Dibatalkan','Pembayaran Ditolak','Selesai') NOT NULL,
+  `status` enum('Melakukan Pembayaran','Pembayaran Selesai','Pembayaran Dibatalkan','Disetujui','Pembayaran Ditolak','Selesai') NOT NULL,
   `jenis_bayar` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -149,8 +152,10 @@ CREATE TABLE `data_pesanan` (
 -- Dumping data for table `data_pesanan`
 --
 
-INSERT INTO `data_pesanan` (`id_pesanan`, `id_user`, `id_customer`, `id_perjalanan`, `id_mobil`, `tanggal_pinjam`, `tanggal_kembali`, `total_harga`, `status`, `jenis_bayar`) VALUES
-(1, 11, 2, 2, 21, '2023-06-27', '2023-06-29', 200000, 'Pembayaran Dibatalkan', 'Tunai');
+INSERT INTO `data_pesanan` (`id_pesanan`, `id_user`, `id_customer`, `id_mobil`, `tanggal_pinjam`, `tanggal_kembali`, `total_harga`, `status`, `jenis_bayar`) VALUES
+(2, 11, 3, 20, '2023-06-20', '2023-06-24', 1200000, 'Selesai', 'Tunai'),
+(3, 11, 4, 20, '2023-06-26', '2023-06-28', 600000, 'Selesai', 'Tunai'),
+(4, 11, 5, 20, '2023-06-27', '2023-06-30', 900000, 'Melakukan Pembayaran', 'Tunai');
 
 -- --------------------------------------------------------
 
@@ -248,8 +253,7 @@ ALTER TABLE `data_perjalanan`
 --
 ALTER TABLE `data_pesanan`
   ADD PRIMARY KEY (`id_pesanan`),
-  ADD KEY `id_user` (`id_user`,`id_customer`,`id_perjalanan`),
-  ADD KEY `id_perjalanan` (`id_perjalanan`),
+  ADD KEY `id_user` (`id_user`,`id_customer`),
   ADD KEY `id_customer` (`id_customer`),
   ADD KEY `id_mobil` (`id_mobil`);
 
@@ -273,7 +277,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `data_customer`
 --
 ALTER TABLE `data_customer`
-  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `data_merk`
@@ -297,13 +301,13 @@ ALTER TABLE `data_pembayaran`
 -- AUTO_INCREMENT for table `data_perjalanan`
 --
 ALTER TABLE `data_perjalanan`
-  MODIFY `id_perjalanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_perjalanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `data_pesanan`
 --
 ALTER TABLE `data_pesanan`
-  MODIFY `id_pesanan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pesanan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -331,7 +335,6 @@ ALTER TABLE `data_customer`
 -- Constraints for table `data_pesanan`
 --
 ALTER TABLE `data_pesanan`
-  ADD CONSTRAINT `data_pesanan_ibfk_1` FOREIGN KEY (`id_perjalanan`) REFERENCES `data_perjalanan` (`id_perjalanan`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `data_pesanan_ibfk_2` FOREIGN KEY (`id_customer`) REFERENCES `data_customer` (`id_customer`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `data_pesanan_ibfk_3` FOREIGN KEY (`id_mobil`) REFERENCES `data_mobil` (`id_mobil`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `data_pesanan_ibfk_4` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
