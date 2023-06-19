@@ -6,7 +6,7 @@
         <div class="col-sm-12">
             <div class="clearfix">
                 <div class="float-left">
-                    <h1 class="h3 mb-4 text-gray-800">Detail Pesanan</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Detail Pesanan Customer</h1>
                 </div>
                 <!-- <div class="float-right">
 								<a href="" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Tambah Data</a>
